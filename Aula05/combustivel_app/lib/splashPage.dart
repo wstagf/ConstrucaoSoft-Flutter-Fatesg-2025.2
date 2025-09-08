@@ -20,8 +20,8 @@ class _SplashPageState extends State<SplashPage> {
   }
 
   void navegar() {
-    Future.delayed(Duration(seconds: 10), () {
-      aaaaNavigatorKey.currentState?.push(
+    Future.delayed(Duration(seconds: 5), () {
+      aaaaNavigatorKey.currentState?.pushReplacement(
         MaterialPageRoute(builder: (context) => HomePage()),
       );
     });
