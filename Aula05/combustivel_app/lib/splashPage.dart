@@ -1,3 +1,4 @@
+import 'package:combustivel_app/home.dart';
 import 'package:flutter/material.dart';
 
 class SplashPage extends StatefulWidget {
@@ -8,9 +9,22 @@ class SplashPage extends StatefulWidget {
 }
 
 class _SplashPageState extends State<SplashPage> {
+  final GlobalKey<NavigatorState> aaaaNavigatorKey =
+      GlobalKey<NavigatorState>();
+
   @override
   void initState() {
     super.initState();
+    print("Inicalizou");
+    navegar();
+  }
+
+  void navegar() {
+    Future.delayed(Duration(seconds: 10), () {
+      aaaaNavigatorKey.currentState?.push(
+        MaterialPageRoute(builder: (context) => HomePage()),
+      );
+    });
   }
 
   @override
@@ -18,6 +32,8 @@ class _SplashPageState extends State<SplashPage> {
     return MaterialApp(
       title: "Titulo da janela",
       color: Colors.red,
+      navigatorKey: aaaaNavigatorKey,
+
       home: Scaffold(
         backgroundColor: Colors.red,
         body: Container(
