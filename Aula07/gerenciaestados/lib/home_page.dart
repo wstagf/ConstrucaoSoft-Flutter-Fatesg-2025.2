@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:gerenciaestados/segunda_pagina.dart';
 
+import 'lista.dart';
+
 class HomePage extends StatelessWidget {
   String mensagem;
 
@@ -34,6 +36,18 @@ class HomePage extends StatelessWidget {
                 );
               },
               child: Text("Segunda Tela"),
+            ),
+
+            FilledButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (builder) => Lista(),
+                  ),
+                );
+              },
+              child: Text("Tela Lista"),
             ),
 
             // componente para quando precisamos fazer um botao
