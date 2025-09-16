@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gerenciaestados/segunda_pagina.dart';
 
 class HomePage extends StatelessWidget {
   String mensagem;
@@ -14,9 +15,42 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Text(
-          mensagem,
-          style: TextStyle(fontSize: 36, fontWeight: FontWeight.bold),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              mensagem,
+              style: TextStyle(fontSize: 36, fontWeight: FontWeight.bold),
+            ),
+
+            // componete para reutilizar o layout do material design
+            FilledButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (builder) => SegundaPagina(),
+                  ),
+                );
+              },
+              child: Text("Segunda Tela"),
+            ),
+
+            // componente para quando precisamos fazer um botao
+            // e queremos definir o layout dele completamente
+            // InkWell(
+            //   onTap: () {},
+
+            //   child: Container(
+            //     padding: EdgeInsets.all(10),
+            //     decoration: BoxDecoration(
+            //       color: Colors.blue,
+            //       borderRadius: BorderRadius.circular(40),
+            //     ),
+            //     child: Text("Segunda Tela"),
+            //   ),
+            // ),
+          ],
         ),
       ),
     );
