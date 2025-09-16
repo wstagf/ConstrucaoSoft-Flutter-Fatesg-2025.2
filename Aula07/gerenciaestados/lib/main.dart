@@ -16,7 +16,12 @@ class MyApp2 extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: HomePage("Uma mensagem de Intervalo"),
+
+      //   essa variavel mensagem foi utilizada de forma POSICIONAL
+      // home: HomePage("Uma mensagem de Intervalo"),
+
+      // essa variavel foi utilizanda de forma declarativa
+      home: HomePage(mensagem: "Minha mensageem"),
     );
   }
 }
