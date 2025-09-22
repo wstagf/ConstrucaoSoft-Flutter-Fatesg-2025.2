@@ -47,7 +47,9 @@ class _SplashPageState extends State<SplashPage> {
               // Container(color: Colors.white, height: 100, width: 100),
               // Container(height: 20),
               // Container(color: Colors.blue, height: 100, width: 100),
-              FlutterLogo(size: 150),
+              // FlutterLogo(size: 150),
+              Image.asset("assets/images/logo.png", width: 150, height: 150),
+
               Container(height: 20),
               CircularProgressIndicator(color: Colors.white),
             ],
