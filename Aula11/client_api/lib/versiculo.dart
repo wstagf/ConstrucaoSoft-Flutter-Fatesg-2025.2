@@ -1,21 +1,20 @@
-import 'package:client_api/versiculo.dart';
 import 'package:flutter/material.dart';
 import 'dart:convert' as convert;
 import 'package:http/http.dart' as http;
 
-class Livro extends StatefulWidget {
+class Versiculo extends StatefulWidget {
   final String nome;
   final String url;
 
-  const Livro({Key? key, required this.nome, required this.url})
+  const Versiculo({Key? key, required this.nome, required this.url})
     : super(key: key);
 
   @override
-  _LivroState createState() => _LivroState();
+  _VersiculoState createState() => _VersiculoState();
 }
 
-class _LivroState extends State<Livro> {
-  var listaCapitulos = [];
+class _VersiculoState extends State<Versiculo> {
+  var listaVersiculos = [];
 
   @override
   void initState() {
@@ -23,39 +22,34 @@ class _LivroState extends State<Livro> {
     carregarDados();
   }
 
-  Widget cadaLivroWidget({
-    required String nome,
-    required String url,
-    required BuildContext ctx,
+  Widget cadaVersiculoWidget({
+    required String verse,
+    required String text,
   }) {
-    return GestureDetector(
-      onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (ctx) => Versiculo(
-              nome: nome,
-              url: url,
+    return Container(
+      margin: EdgeInsets.all(10),
+      color: Colors.green.withAlpha(120),
+      padding: EdgeInsets.all(20),
+      height: 80,
+      child: Row(
+        children: [
+          Text(
+            "Versiculo: $verse",
+            style: TextStyle(fontSize: 16),
+            textAlign: TextAlign.start,
+          ),
+          Container(
+            width: 20,
+          ),
+
+          Expanded(
+            child: Text(
+              text,
+              style: TextStyle(fontSize: 16),
+              textAlign: TextAlign.start,
             ),
           ),
-        );
-      },
-      child: Container(
-        margin: EdgeInsets.all(10),
-        color: Colors.green.withAlpha(120),
-        padding: EdgeInsets.all(20),
-        height: 80,
-        child: Row(
-          children: [
-            Expanded(
-              child: Text(
-                "Capitulo: $nome",
-                style: TextStyle(fontSize: 16),
-                textAlign: TextAlign.start,
-              ),
-            ),
-          ],
-        ),
+        ],
       ),
     );
   }
@@ -72,7 +66,7 @@ class _LivroState extends State<Livro> {
 
     print(jsonResponse);
     setState(() {
-      listaCapitulos = jsonResponse["chapters"];
+      listaVersiculos = jsonResponse["verses"];
     });
   }
 
@@ -80,10 +74,10 @@ class _LivroState extends State<Livro> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.nome),
+        title: Text("Capitulo${widget.nome}"),
         actions: [
           Text(
-            "Capitulos Carregados: ${listaCapitulos.length}",
+            "Capitulos Carregados: ${listaVersiculos.length}",
             style: TextStyle(fontSize: 18),
           ),
           Container(
@@ -107,11 +101,10 @@ class _LivroState extends State<Livro> {
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               Text(""),
-              ...listaCapitulos.map((capitulo) {
-                return cadaLivroWidget(
-                  nome: capitulo["chapter"].toString(),
-                  url: capitulo["url"],
-                  ctx: context,
+              ...listaVersiculos.map((versic) {
+                return cadaVersiculoWidget(
+                  verse: versic["verse"].toString(),
+                  text: versic["text"],
                 );
               }),
             ],
