@@ -28,6 +28,37 @@ class _ListaPageState extends State<ListaPage> {
     });
   }
 
+  Widget cadaLivroWidget({required String code, required String nome}) {
+    return Container(
+      margin: EdgeInsets.all(0),
+      color: Colors.green.withAlpha(120),
+      padding: EdgeInsets.all(20),
+      height: 80,
+      child: Row(
+        children: [
+          Container(
+            width: 70,
+            child: Text(
+              code,
+              style: TextStyle(fontSize: 20),
+              textAlign: TextAlign.center,
+            ),
+          ),
+          Container(
+            width: 10,
+          ),
+          Expanded(
+            child: Text(
+              nome,
+              style: TextStyle(fontSize: 16),
+              textAlign: TextAlign.start,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,13 +76,18 @@ class _ListaPageState extends State<ListaPage> {
           ),
         ],
       ),
-      body: Column(
-        children: [
-          Text(
-            listaLivros.length.toString(),
-            style: TextStyle(fontSize: 48),
-          ),
-        ],
+      body: Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: Column(
+          children: [
+            Text(
+              listaLivros.length.toString(),
+              style: TextStyle(fontSize: 48),
+            ),
+            cadaLivroWidget(code: "GEN", nome: "Genesis"),
+            cadaLivroWidget(code: "LEV", nome: "Levidico"),
+          ],
+        ),
       ),
     );
   }
