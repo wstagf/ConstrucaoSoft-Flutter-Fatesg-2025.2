@@ -11,9 +11,10 @@ class ListaPage extends StatefulWidget {
 }
 
 class _ListaPageState extends State<ListaPage> {
+  var listaLivros = [];
   void carregarDados() async {
     var response = await http.get(
-      Uri.parse("https://bible-api.com/Jo%C3%A3o+3:16?translation=almeida"),
+      Uri.parse("https://bible-api.com/data/almeida"),
     );
 
     print(response);
@@ -22,6 +23,9 @@ class _ListaPageState extends State<ListaPage> {
         convert.jsonDecode(response.body) as Map<String, dynamic>;
 
     print(jsonResponse);
+    setState(() {
+      listaLivros = jsonResponse["books"];
+    });
   }
 
   @override
@@ -42,7 +46,12 @@ class _ListaPageState extends State<ListaPage> {
         ],
       ),
       body: Column(
-        children: [],
+        children: [
+          Text(
+            listaLivros.length.toString(),
+            style: TextStyle(fontSize: 48),
+          ),
+        ],
       ),
     );
   }
