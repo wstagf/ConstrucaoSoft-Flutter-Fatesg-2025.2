@@ -28,9 +28,13 @@ class _ListaPageState extends State<ListaPage> {
     });
   }
 
-  Widget cadaLivroWidget({required String code, required String nome}) {
+  Widget cadaLivroWidget({
+    required String code,
+    required String nome,
+    required String url,
+  }) {
     return Container(
-      margin: EdgeInsets.all(0),
+      margin: EdgeInsets.all(10),
       color: Colors.green.withAlpha(120),
       padding: EdgeInsets.all(20),
       height: 80,
@@ -65,6 +69,13 @@ class _ListaPageState extends State<ListaPage> {
       appBar: AppBar(
         title: Text("Minha Biblia"),
         actions: [
+          Text(
+            "Livros carregados: ${listaLivros.length}",
+            style: TextStyle(fontSize: 18),
+          ),
+          Container(
+            width: 40,
+          ),
           GestureDetector(
             onTap: () {
               carregarDados();
@@ -78,15 +89,20 @@ class _ListaPageState extends State<ListaPage> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
-        child: Column(
-          children: [
-            Text(
-              listaLivros.length.toString(),
-              style: TextStyle(fontSize: 48),
-            ),
-            cadaLivroWidget(code: "GEN", nome: "Genesis"),
-            cadaLivroWidget(code: "LEV", nome: "Levidico"),
-          ],
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              Text(""),
+              ...listaLivros.map((livro) {
+                return cadaLivroWidget(
+                  code: livro["id"],
+                  nome: livro["name"],
+                  url: livro["url"],
+                );
+              }),
+            ],
+          ),
         ),
       ),
     );
