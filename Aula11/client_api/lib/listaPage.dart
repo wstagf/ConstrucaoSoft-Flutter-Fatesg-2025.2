@@ -1,5 +1,6 @@
 import 'dart:convert' as convert;
 
+import 'package:client_api/livro.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
@@ -32,33 +33,46 @@ class _ListaPageState extends State<ListaPage> {
     required String code,
     required String nome,
     required String url,
+    required BuildContext ctx,
   }) {
-    return Container(
-      margin: EdgeInsets.all(10),
-      color: Colors.green.withAlpha(120),
-      padding: EdgeInsets.all(20),
-      height: 80,
-      child: Row(
-        children: [
-          Container(
-            width: 70,
-            child: Text(
-              code,
-              style: TextStyle(fontSize: 20),
-              textAlign: TextAlign.center,
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (ctx) => Livro(
+              nome: nome,
             ),
           ),
-          Container(
-            width: 10,
-          ),
-          Expanded(
-            child: Text(
-              nome,
-              style: TextStyle(fontSize: 16),
-              textAlign: TextAlign.start,
+        );
+      },
+      child: Container(
+        margin: EdgeInsets.all(10),
+        color: Colors.green.withAlpha(120),
+        padding: EdgeInsets.all(20),
+        height: 80,
+        child: Row(
+          children: [
+            Container(
+              width: 70,
+              child: Text(
+                code,
+                style: TextStyle(fontSize: 20),
+                textAlign: TextAlign.center,
+              ),
             ),
-          ),
-        ],
+            Container(
+              width: 10,
+            ),
+            Expanded(
+              child: Text(
+                nome,
+                style: TextStyle(fontSize: 16),
+                textAlign: TextAlign.start,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -99,6 +113,7 @@ class _ListaPageState extends State<ListaPage> {
                   code: livro["id"],
                   nome: livro["name"],
                   url: livro["url"],
+                  ctx: context,
                 );
               }),
             ],
