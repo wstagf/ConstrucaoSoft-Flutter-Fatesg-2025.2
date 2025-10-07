@@ -42,6 +42,7 @@ class _ListaPageState extends State<ListaPage> {
           MaterialPageRoute(
             builder: (ctx) => Livro(
               nome: nome,
+              url: url,
             ),
           ),
         );
