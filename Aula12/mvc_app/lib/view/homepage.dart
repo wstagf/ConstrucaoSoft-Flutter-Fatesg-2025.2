@@ -65,7 +65,23 @@ class _HomePageState extends State<HomePage> {
               style: TextStyle(fontSize: 36),
             ),
             ...listaControler.obterTodas().map((tarefa) {
-              return Text(tarefa.todo);
+              return Container(
+                width: 400,
+                height: 50,
+                child: Row(
+                  children: [
+                    GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          listaControler.apagarItem(id: tarefa.id);
+                        });
+                      },
+                      child: Icon(Icons.close),
+                    ),
+                    Text(tarefa.todo),
+                  ],
+                ),
+              );
             }),
           ],
         ),

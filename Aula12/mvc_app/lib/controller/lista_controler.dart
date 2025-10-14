@@ -1,15 +1,15 @@
 import 'package:mvc_app/model/parafazer_model.dart';
 
 class ListaControler {
-  final List<ParaFazer> _minhaLista = [
+  List<ParaFazer> minhaLista = [
     ParaFazer(
-      id: 1,
+      id: 0,
       todo: "Tarefa 001",
       completed: false,
       userId: 123,
     ),
     ParaFazer(
-      id: 2,
+      id: 1,
       todo: "Tarefa 002",
       completed: true,
       userId: 321,
@@ -18,7 +18,7 @@ class ListaControler {
 
   // get all
   List<ParaFazer> obterTodas() {
-    return _minhaLista;
+    return minhaLista;
   }
 
   // get por id
@@ -26,18 +26,22 @@ class ListaControler {
   // update por id
 
   // delete
+  void apagarItem({required int id}) {
+    print(id);
+    minhaLista = minhaLista.where((item) => item.id != id).toList();
+  }
 
   // inserir item
   void adicionarItem({required String tarefa}) {
     if (tarefa.isNotEmpty) {
       ParaFazer novoParaFazer = ParaFazer(
-        id: _minhaLista.length + 1,
+        id: minhaLista.length + 1,
         todo: tarefa,
         completed: false,
         userId: 1,
       );
 
-      _minhaLista.add(novoParaFazer);
+      minhaLista.add(novoParaFazer);
     }
   }
 }
