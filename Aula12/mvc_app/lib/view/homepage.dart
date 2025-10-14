@@ -10,6 +10,8 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   ListaControler listaControler = ListaControler();
+  TextEditingController txtContorler = TextEditingController();
+  String novaTarefa = "";
 
   @override
   Widget build(BuildContext context) {
@@ -18,8 +20,10 @@ class _HomePageState extends State<HomePage> {
         onTap: () {
           setState(() {
             listaControler.adicionarItem(
-              tarefa: "AprenderFlutter",
+              tarefa: novaTarefa,
             );
+            novaTarefa = "";
+            txtContorler.clear();
           });
         },
         child: Container(
@@ -48,6 +52,14 @@ class _HomePageState extends State<HomePage> {
         ),
         child: Column(
           children: [
+            TextFormField(
+              controller: txtContorler,
+              onChanged: (value) {
+                setState(() {
+                  novaTarefa = value;
+                });
+              },
+            ),
             Text(
               "Existem ${listaControler.obterTodas().length} tarefas",
               style: TextStyle(fontSize: 36),
