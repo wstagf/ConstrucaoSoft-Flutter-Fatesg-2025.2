@@ -1,16 +1,25 @@
-# mvc_app
+MVC 
 
-A new Flutter project.
+é o principal padrão de arquitetura de software utilizado no desenvolvimento de aplicações web.
 
-## Getting Started
+Ele divide a aplicação em três componentes principais: Model (Modelo), View (Visão) e Controller (Controlador).
 
-This project is a starting point for a Flutter application.
+1. Model (Modelo):
+O Model é responsável pela lógica de negócios e pela manipulação dos dados da aplicação. Ele representa a estrutura dos dados, as regras de negócio e as operações que podem ser realizadas sobre esses dados. 
 
-A few resources to get you started if this is your first Flutter project:
+2. View (Visão):
+A View é responsável pela apresentação dos dados ao usuário. Ela exibe as informações fornecidas pelo Model e captura as interações do usuário. 
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+3. Controller (Controlador):
+O Controller atua como um intermediário entre o Model e a View. Ele recebe as entradas do usuários, processa essas entradas (geralmente interagindo com o Model)
+
+
+
+No ambiente MOBILE, temos outros tripos de arquitetura, como:
+- MVVM (Model-View-ViewModel) 
+- MVP (Model-View-Presenter) - Provider / Repository
+- VIPER (View-Interactor-Presenter-Entity-Router)
+- Clean Architecture
+- MVI (Model-View-Intent)
+- Flux/Redux
