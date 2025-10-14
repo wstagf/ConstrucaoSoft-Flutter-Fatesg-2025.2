@@ -1,8 +1,8 @@
 class ParaFazer {
-  int? id;
-  String? todo;
-  bool? completed;
-  int? userId;
+  int id;
+  String todo;
+  bool completed;
+  int userId;
 
   ParaFazer({
     required this.id,

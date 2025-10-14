@@ -52,22 +52,9 @@ class _HomePageState extends State<HomePage> {
               "Existem ${listaControler.obterTodas().length} tarefas",
               style: TextStyle(fontSize: 36),
             ),
-            Text(
-              "Tarefa 1",
-              style: TextStyle(fontSize: 26),
-            ),
-            Text(
-              "Tarefa 2",
-              style: TextStyle(fontSize: 26),
-            ),
-            Text(
-              "Tarefa 3",
-              style: TextStyle(fontSize: 26),
-            ),
-            Text(
-              "Tarefa 4",
-              style: TextStyle(fontSize: 26),
-            ),
+            ...listaControler.obterTodas().map((tarefa) {
+              return Text(tarefa.todo);
+            }),
           ],
         ),
       ),
