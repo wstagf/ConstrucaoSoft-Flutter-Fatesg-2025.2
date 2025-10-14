@@ -21,9 +21,15 @@ class ListaControler {
     return minhaLista;
   }
 
-  // get por id
-
-  // update por id
+  // update por id // set done
+  void atualizarItem({required int id, required bool done}) {
+    for (var item in minhaLista) {
+      if (item.id == id) {
+        item.completed = !item.completed;
+        break;
+      }
+    }
+  }
 
   // delete
   void apagarItem({required int id}) {

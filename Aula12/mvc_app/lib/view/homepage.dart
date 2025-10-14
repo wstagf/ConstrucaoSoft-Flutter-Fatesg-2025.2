@@ -78,7 +78,26 @@ class _HomePageState extends State<HomePage> {
                       },
                       child: Icon(Icons.close),
                     ),
-                    Text(tarefa.todo),
+                    GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          listaControler.atualizarItem(
+                            id: tarefa.id,
+                            done: true,
+                          );
+                        });
+                      },
+                      child: Icon(Icons.done),
+                    ),
+                    Text(
+                      tarefa.todo,
+                      style: TextStyle(
+                        fontSize: 24,
+                        decoration: tarefa.completed
+                            ? TextDecoration.lineThrough
+                            : TextDecoration.none,
+                      ),
+                    ),
                   ],
                 ),
               );
