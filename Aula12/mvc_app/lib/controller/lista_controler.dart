@@ -28,4 +28,14 @@ class ListaControler {
   // delete
 
   // inserir item
+  void adicionarItem({required tarefa}) {
+    ParaFazer novoParaFazer = ParaFazer(
+      id: _minhaLista.length + 1,
+      todo: tarefa,
+      completed: false,
+      userId: 1,
+    );
+
+    _minhaLista.add(novoParaFazer);
+  }
 }
