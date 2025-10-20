@@ -10,10 +10,19 @@ class Homepage extends StatefulWidget {
 
 class _HomepageState extends State<Homepage> {
   LocationData? locationData;
+  Location location = Location();
+
+  @override
+  void initState() {
+    super.initState();
+    location.onLocationChanged.listen((LocationData currentLocation) {
+      setState(() {
+        locationData = currentLocation;
+      });
+    });
+  }
 
   Future atualizarGPS() async {
-    Location location = Location();
-
     bool serviceEnabled;
     PermissionStatus permissionGranted;
 
