@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:permission_handler/permission_handler.dart';
+import 'package:location/location.dart';
 
 class Homepage extends StatefulWidget {
   const Homepage({super.key});
@@ -9,29 +9,60 @@ class Homepage extends StatefulWidget {
 }
 
 class _HomepageState extends State<Homepage> {
-  Future<void> solicitarAcesso() async {
-    PermissionStatus status = await Permission.location.request();
+  LocationData? locationData;
 
-    print(status);
+  Future atualizarGPS() async {
+    Location location = Location();
 
-    // var status = await Permission.camera.status;
-    // if (status.isDenied) {
-    //   print("Acesso Bloqueado");
-    // } else if (await Permission.location.isRestricted) {
-    //   print("Acesso Restrito");
-    // }
-    // if (status.isGranted) {
-    //   print("Acesso Liberado");
-    // }
+    bool serviceEnabled;
+    PermissionStatus permissionGranted;
+
+    serviceEnabled = await location.serviceEnabled();
+    if (!serviceEnabled) {
+      serviceEnabled = await location.requestService();
+      if (!serviceEnabled) {
+        return;
+      }
+    }
+
+    permissionGranted = await location.hasPermission();
+    if (permissionGranted == PermissionStatus.denied) {
+      permissionGranted = await location.requestPermission();
+      if (permissionGranted != PermissionStatus.granted) {
+        return;
+      }
+    }
+
+    locationData = await location.getLocation();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(),
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: Column(
+            children: [
+              Text(
+                "Minha localização é",
+                style: TextStyle(fontSize: 24),
+              ),
+              Text(
+                "Lat: 43.....",
+                style: TextStyle(fontSize: 24),
+              ),
+              Text(
+                "Long: 18",
+                style: TextStyle(fontSize: 24),
+              ),
+            ],
+          ),
+        ),
+      ),
       floatingActionButton: GestureDetector(
         onTap: () {
-          solicitarAcesso();
+          atualizarGPS();
         },
         child: Icon(Icons.location_on),
       ),
