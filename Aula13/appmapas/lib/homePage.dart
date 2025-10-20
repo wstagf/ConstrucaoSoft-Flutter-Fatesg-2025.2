@@ -32,8 +32,8 @@ class _HomepageState extends State<Homepage> {
         return;
       }
     }
-
     locationData = await location.getLocation();
+    setState(() {});
   }
 
   @override
@@ -48,14 +48,18 @@ class _HomepageState extends State<Homepage> {
                 "Minha localização é",
                 style: TextStyle(fontSize: 24),
               ),
-              Text(
-                "Lat: 43.....",
-                style: TextStyle(fontSize: 24),
-              ),
-              Text(
-                "Long: 18",
-                style: TextStyle(fontSize: 24),
-              ),
+              locationData != null
+                  ? Text(
+                      "Lat: " + locationData!.latitude.toString(),
+                      style: TextStyle(fontSize: 24),
+                    )
+                  : Text(" "),
+              locationData != null
+                  ? Text(
+                      "Long: " + locationData!.longitude.toString(),
+                      style: TextStyle(fontSize: 24),
+                    )
+                  : Text(" "),
             ],
           ),
         ),
