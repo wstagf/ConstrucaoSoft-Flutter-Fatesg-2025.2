@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gestaoprovider/homepage.dart';
 import 'package:gestaoprovider/consumo_provider.dart';
+import 'package:gestaoprovider/mesas_provider.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -8,6 +9,7 @@ void main() {
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => ConsumoProvider()),
+        ChangeNotifierProvider(create: (_) => MesasProvider()),
       ],
       child: const MyApp(),
     ),

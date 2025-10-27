@@ -1,7 +1,7 @@
 class MesaModel {
-  final String numero;
-  final double consumo;
-  final String status;
+  String numero;
+  double consumo;
+  String status;
 
   MesaModel({
     required this.numero,

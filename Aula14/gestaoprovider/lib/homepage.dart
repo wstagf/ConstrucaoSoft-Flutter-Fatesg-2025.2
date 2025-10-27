@@ -1,36 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:gestaoprovider/action_button.dart';
 import 'package:gestaoprovider/mesa.dart';
+import 'package:gestaoprovider/mesas_provider.dart';
 import 'package:provider/provider.dart';
 
 import 'mesa_model.dart';
 import 'consumo_provider.dart';
 
-class HomePage extends StatefulWidget {
+class HomePage extends StatelessWidget {
   const HomePage({super.key});
-
-  @override
-  State<HomePage> createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
-  var mesas = <MesaModel>[
-    MesaModel(numero: "1", consumo: 110.00, status: "Ativa"),
-    MesaModel(numero: "2", consumo: 0.00, status: "Livre"),
-    MesaModel(numero: "3", consumo: 0.00, status: "Livre"),
-    MesaModel(numero: "4", consumo: 0.00, status: "Livre"),
-  ];
-
-  double calcularTotalMesas() {
-    var mesasOcupadas = mesas.where((mesa) => mesa.status == "Ativa");
-    double total = 0;
-
-    for (var element in mesasOcupadas) {
-      total = total + element.consumo;
-    }
-
-    return total;
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -78,7 +56,8 @@ class _HomePageState extends State<HomePage> {
                         ),
                         SizedBox(height: 10),
                         Text(
-                          "Mesas Ativas: ${mesas.where((mesa) => mesa.status == "Ativa").length}",
+                          //"Mesas Ativas: ${mesas.where((mesa) => mesa.status == "Ativa").length}",
+                          "Mesas Ativas: ${context.watch<MesasProvider>().getMesasOcupadas()}",
                           style: TextStyle(
                             color: Colors.black,
                             fontSize: 28,
@@ -98,7 +77,7 @@ class _HomePageState extends State<HomePage> {
                     runSpacing: 16,
 
                     children: [
-                      ...mesas.map(
+                      ...context.watch<MesasProvider>().getMesas().map(
                         (mesaAtual) => MesaWidget(
                           mesa: mesaAtual,
                         ),
