@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:gestaoprovider/action_button.dart';
 import 'package:gestaoprovider/mesa.dart';
+import 'package:provider/provider.dart';
 
 import 'mesa_model.dart';
+import 'consumo_provider.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -66,7 +68,8 @@ class _HomePageState extends State<HomePage> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "Consumo Mesas: R\$ ${calcularTotalMesas()}",
+                          //"Consumo Mesas: R\$ ${calcularTotalMesas()}",
+                          "Consume Mesas: ${context.watch<ConsumoProvider>().totalConsumo}",
                           style: TextStyle(
                             color: Colors.black54,
                             fontSize: 18,
