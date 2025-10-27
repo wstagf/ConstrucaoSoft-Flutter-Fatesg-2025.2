@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:gestaoprovider/mesa_model.dart';
 
 class MesaWidget extends StatelessWidget {
-  const MesaWidget({super.key});
+  final MesaModel mesa;
+  const MesaWidget({super.key, required this.mesa});
 
   @override
   Widget build(BuildContext context) {
@@ -9,16 +11,18 @@ class MesaWidget extends StatelessWidget {
       height: 150,
       width: 150,
       decoration: BoxDecoration(
-        color: const Color.fromARGB(255, 91, 0, 151),
+        color: mesa.status == "Livre"
+            ? const Color.fromARGB(255, 2, 181, 5)
+            : const Color.fromARGB(255, 96, 0, 70),
         borderRadius: BorderRadius.circular(20),
       ),
       child: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: const Center(
+        child: Center(
           child: Column(
             children: [
               Text(
-                'Mesa Numero 1',
+                "Mesa ${mesa.numero}",
                 style: TextStyle(color: Colors.white, fontSize: 24),
               ),
               Row(
@@ -29,7 +33,7 @@ class MesaWidget extends StatelessWidget {
                     size: 40,
                   ),
                   Text(
-                    "R\$ 150,00",
+                    "Mesa ${mesa.consumo}",
                     style: TextStyle(color: Colors.white, fontSize: 20),
                   ),
                 ],

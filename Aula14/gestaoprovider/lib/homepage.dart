@@ -2,8 +2,33 @@ import 'package:flutter/material.dart';
 import 'package:gestaoprovider/action_button.dart';
 import 'package:gestaoprovider/mesa.dart';
 
-class HomePage extends StatelessWidget {
+import 'mesa_model.dart';
+
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  var mesas = <MesaModel>[
+    MesaModel(numero: "1", consumo: 110.00, status: "Ativa"),
+    MesaModel(numero: "2", consumo: 0.00, status: "Livre"),
+    MesaModel(numero: "3", consumo: 0.00, status: "Livre"),
+    MesaModel(numero: "4", consumo: 0.00, status: "Livre"),
+  ];
+
+  double calcularTotalMesas() {
+    var mesasOcupadas = mesas.where((mesa) => mesa.status == "Ativa");
+    double total = 0;
+
+    for (var element in mesasOcupadas) {
+      total = total + element.consumo;
+    }
+
+    return total;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,9 +64,9 @@ class HomePage extends StatelessWidget {
                     padding: const EdgeInsets.all(20.0),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      children: const [
+                      children: [
                         Text(
-                          "Consumo Mesas: R\$ 2.450,75",
+                          "Consumo Mesas: R\$ ${calcularTotalMesas()}",
                           style: TextStyle(
                             color: Colors.black54,
                             fontSize: 18,
@@ -50,7 +75,7 @@ class HomePage extends StatelessWidget {
                         ),
                         SizedBox(height: 10),
                         Text(
-                          "Mesas Ativas: 10",
+                          "Mesas Ativas: ${mesas.where((mesa) => mesa.status == "Ativa").length}",
                           style: TextStyle(
                             color: Colors.black,
                             fontSize: 28,
@@ -58,10 +83,6 @@ class HomePage extends StatelessWidget {
                           ),
                         ),
                         Spacer(),
-                        Text(
-                          "Previsão de faturamento para hoje: R\$ 5.000,00",
-                          style: TextStyle(color: Colors.black54, fontSize: 14),
-                        ),
                       ],
                     ),
                   ),
@@ -74,19 +95,27 @@ class HomePage extends StatelessWidget {
                     runSpacing: 16,
 
                     children: [
-                      const MesaWidget(),
-                      const MesaWidget(),
-                      const MesaWidget(),
-                      const MesaWidget(),
-                      const MesaWidget(),
-                      const MesaWidget(),
-                      const MesaWidget(),
-                      const MesaWidget(),
-                      const MesaWidget(),
-                      const MesaWidget(),
-                      const MesaWidget(),
-                      const MesaWidget(),
+                      ...mesas.map(
+                        (mesaAtual) => MesaWidget(
+                          mesa: mesaAtual,
+                        ),
+                      ),
                     ],
+
+                    // [
+                    //   const ,
+                    //   const MesaWidget(),
+                    //   const MesaWidget(),
+                    //   const MesaWidget(),
+                    //   const MesaWidget(),
+                    //   const MesaWidget(),
+                    //   const MesaWidget(),
+                    //   const MesaWidget(),
+                    //   const MesaWidget(),
+                    //   const MesaWidget(),
+                    //   const MesaWidget(),
+                    //   const MesaWidget(),
+                    // ],
                   ),
                 ),
               ),
