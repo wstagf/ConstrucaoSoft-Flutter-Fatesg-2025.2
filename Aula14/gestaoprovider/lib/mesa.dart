@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gestaoprovider/mesa_model.dart';
+import 'package:gestaoprovider/mesas_provider.dart';
 import 'package:provider/provider.dart';
 
 import 'consumo_provider.dart';
@@ -13,6 +14,11 @@ class MesaWidget extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         context.read<ConsumoProvider>().adicionarConsumo(50);
+        if (mesa.status == "Ativa") {
+          context.read<MesasProvider>().fecharContaDaMEsa(mesa);
+        } else {
+          context.read<MesasProvider>().selectionarMesa(mesa);
+        }
       },
       child: Container(
         height: 150,

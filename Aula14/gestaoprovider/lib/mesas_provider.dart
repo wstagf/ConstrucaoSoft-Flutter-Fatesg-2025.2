@@ -24,14 +24,14 @@ class MesasProvider with ChangeNotifier {
     return _mesas;
   }
 
-  void selectionarMesa(int index) {
-    _mesas[index].status = "Ativa";
+  void selectionarMesa(MesaModel mesa) {
+    mesa.status = "Ativa";
 
     notifyListeners();
   }
 
-  void fecharContaDaMEsa(int index) {
-    _mesas[index].status = "Livre";
+  void fecharContaDaMEsa(MesaModel mesa) {
+    mesa.status = "Livre";
 
     notifyListeners();
   }
